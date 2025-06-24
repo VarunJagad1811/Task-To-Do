@@ -1,234 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Task Tracker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(135deg, #3f51b1 0%, #5a55ae 25%, #7b5fac 50%, #8f6aae 75%, #a883ba 100%);
-            color: #232323;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  <meta charset="UTF-8" />
+  <title>Task Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            background: rgba(255,255,255,0.15);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px 32px 32px 32px;
-            min-width: 350px;
-            max-width: 420px;
-            width: 100%;
-        }
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
 
-        h3 {
-            text-align: center;
-            color: #4e4376;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            font-weight: 700;
-            font-size: 2rem;
-        }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        label {
-            font-size: 1.1rem;
-            color: #5433ff;
-            margin-right: 10px;
-        }
+    .container {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 40px 30px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      width: 90%;
+      max-width: 500px;
+      animation: fadeIn 1s ease;
+    }
 
-        input[type="text"] {
-            width: 80%;
-            padding: 10px 16px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.6);
-            font-size: 1rem;
-            box-shadow: 0 2px 8px rgba(60,60,100,0.06);
-            transition: background 0.2s;
-        }
-        input[type="text"]:focus {
-            background: #fff;
-            outline: none;
-        }
+    @keyframes fadeIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-        button {
-            padding: 10px 28px;
-            margin-left: 8px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(90deg, #5433ff 0%, #20bdff 100%);
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(60,60,100,0.10);
-            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-        }
-        button:hover {
-            background: linear-gradient(90deg, #20bdff 0%, #5433ff 100%);
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 8px 24px rgba(60,60,100,0.18);
-        }
+    h3 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #fefefe;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 18px 0 0 0;
-        }
+    label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffffcc;
+    }
 
-        li {
-            background: rgba(255,255,255,0.75);
-            margin: 12px 0;
-            padding: 14px 18px;
-            border-radius: 14px;
-            box-shadow: 0 2px 6px rgba(80,70,140,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 1.1rem;
-            transition: box-shadow 0.2s;
-        }
-        li:hover {
-            box-shadow: 0 6px 20px rgba(80,70,140,0.12);
-        }
+    input[type="text"] {
+      width: 70%;
+      padding: 10px 15px;
+      border-radius: 12px;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 1rem;
+      margin-top: 10px;
+      outline: none;
+      transition: 0.3s;
+    }
 
-        li input[type="checkbox"] {
-            margin-right: 14px;
-            accent-color: #4e4376;
-            transform: scale(1.3);
-        }
+    input[type="text"]::placeholder {
+      color: #dddddd;
+    }
 
-        li.completed label {
-            text-decoration: line-through;
-            color: #b0b0b0;
-        }
+    input[type="text"]:focus {
+      background: rgba(255,255,255,0.25);
+    }
 
-        li .actions {
-            display: flex;
-            gap: 8px;
-        }
+    button {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 10px;
+      margin-left: 10px;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-        li button {
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            border-radius: 7px;
-            background: #ff5f6d;
-            background: linear-gradient(90deg, #ffc371 0%, #ff5f6d 100%);
-            color: #fff;
-            font-weight: 600;
-            box-shadow: none;
-        }
-        li button.edit {
-            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
-        }
-        li button.edit:hover {
-            background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
-        }
-        li button.delete:hover {
-            background: linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%);
-        }
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 115, 255, 0.4);
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px 8px;
-                min-width: unset;
-                width: 98vw;
-            }
-            input[type="text"] {
-                width: 70%;
-            }
-        }
-    </style>
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: rgba(255,255,255,0.08);
+      margin: 10px 0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s;
+    }
+
+    li:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    li.completed label {
+      text-decoration: line-through;
+      color: #bbb;
+    }
+
+    li input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.3);
+      accent-color: #00c6ff;
+    }
+
+    li label {
+      flex: 1;
+      margin-left: 5px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    li button {
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+    }
+
+    li button.edit {
+      background: linear-gradient(45deg, #42e695, #3bb2b8);
+    }
+
+    li button.delete {
+      background: linear-gradient(45deg, #ff0844, #ffb199);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      button {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h3>Task To-Do</h3>
-        <p>
-            <label for="new-task">Add Task</label>
-            <input id="new-task" type="text" placeholder="What do you need to do?">
-            <button onclick="addTask()">Add</button>
-        </p>
-        <h3>To Do</h3>
-        <ul id="incomplete-tasks"></ul>
-        <h3>Completed Tasks</h3>
-        <ul id="completed-tasks"></ul>
-    </div>
-    <script>
-        // Add a new task
-        function addTask() {
-            const taskInput = document.getElementById("new-task");
-            const taskText = taskInput.value.trim();
-            if (!taskText) return;
-            const li = createTaskElement(taskText);
-            document.getElementById("incomplete-tasks").appendChild(li);
-            taskInput.value = '';
-        }
+  <div class="container">
+    <h3>Task To-Do</h3>
+    <p>
+      <label for="new-task">Add Task</label><br>
+      <input id="new-task" type="text" placeholder="What do you need to do?">
+      <button onclick="addTask()">Add</button>
+    </p>
+    <h3>To Do</h3>
+    <ul id="incomplete-tasks"></ul>
+    <h3>Completed Tasks</h3>
+    <ul id="completed-tasks"></ul>
+  </div>
 
-        // Create task HTML element
-        function createTaskElement(text) {
-            const li = document.createElement("li");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.onchange = function() { toggleTask(li, checkbox); };
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById("new-task");
+      const taskText = taskInput.value.trim();
+      if (!taskText) return;
+      const li = createTaskElement(taskText);
+      document.getElementById("incomplete-tasks").appendChild(li);
+      taskInput.value = '';
+    }
 
-            const label = document.createElement("label");
-            label.innerText = text;
+    function createTaskElement(text) {
+      const li = document.createElement("li");
 
-            const actions = document.createElement("div");
-            actions.className = "actions";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.onchange = function() { toggleTask(li, checkbox); };
 
-            const editBtn = document.createElement("button");
-            editBtn.className = "edit";
-            editBtn.innerText = "Edit";
-            editBtn.onclick = function() { editTask(li, label, editBtn); };
+      const label = document.createElement("label");
+      label.innerText = text;
 
-            const deleteBtn = document.createElement("button");
-            deleteBtn.className = "delete";
-            deleteBtn.innerText = "Delete";
-            deleteBtn.onclick = function() { li.remove(); };
+      const actions = document.createElement("div");
+      actions.className = "actions";
 
-            actions.appendChild(editBtn);
-            actions.appendChild(deleteBtn);
+      const editBtn = document.createElement("button");
+      editBtn.className = "edit";
+      editBtn.innerText = "Edit";
+      editBtn.onclick = function() { editTask(li, label, editBtn); };
 
-            li.appendChild(checkbox);
-            li.appendChild(label);
-            li.appendChild(actions);
-            return li;
-        }
+      const deleteBtn = document.createElement("button");
+      deleteBtn.className = "delete";
+      deleteBtn.innerText = "Delete";
+      deleteBtn.onclick = function() { li.remove(); };
 
-        // Toggle task completion
-        function toggleTask(li, checkbox) {
-            if (checkbox.checked) {
-                li.classList.add("completed");
-                document.getElementById("completed-tasks").appendChild(li);
-            } else {
-                li.classList.remove("completed");
-                document.getElementById("incomplete-tasks").appendChild(li);
-            }
-        }
+      actions.appendChild(editBtn);
+      actions.appendChild(deleteBtn);
 
-        // Edit task
-        function editTask(li, label, btn) {
-            if (btn.innerText === "Edit") {
-                const input = document.createElement("input");
-                input.type = "text";
-                input.value = label.innerText;
-                li.replaceChild(input, label);
-                btn.innerText = "Save";
-            } else {
-                const input = li.querySelector("input[type='text']");
-                label.innerText = input.value;
-                li.replaceChild(label, input);
-                btn.innerText = "Edit";
-            }
-        }
-    </script>
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      li.appendChild(actions);
+      return li;
+    }
+
+    function toggleTask(li, checkbox) {
+      if (checkbox.checked) {
+        li.classList.add("completed");
+        document.getElementById("completed-tasks").appendChild(li);
+      } else {
+        li.classList.remove("completed");
+        document.getElementById("incomplete-tasks").appendChild(li);
+      }
+    }
+
+    function editTask(li, label, btn) {
+      if (btn.innerText === "Edit") {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = label.innerText;
+        input.style.padding = "6px";
+        input.style.borderRadius = "6px";
+        input.style.width = "100%";
+        li.replaceChild(input, label);
+        btn.innerText = "Save";
+      } else {
+        const input = li.querySelector("input[type='text']");
+        label.innerText = input.value;
+        li.replaceChild(label, input);
+        btn.innerText = "Edit";
+      }
+    }
+  </script>
 </body>
 </html>
